@@ -1,0 +1,31 @@
+﻿@model List<Reporter.EntityLayer.Entities.Article>
+
+@{
+    ViewData["Title"] = "MyArticleList";
+    Layout = "~/Views/Shared/_AuthorNewLayout.cshtml";
+}
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <div class="content-wrapper">
+        <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
+            @foreach (var item in Model)
+            {
+                <div class="col">
+                    <div class="card h-100">
+                        <img class="card-img-top" src="@item.CoverImageUrl" alt="Card image cap" />
+                        <div class="card-body">
+                            <h5 class="card-title">@item.Title</h5>
+                            <p class="card-text">
+                                @item.Content
+                            </p>
+                            <a class="btn btn-outline-danger" href="/Author/DeleteArticle/@item.ArticleId"><i class="bx bx-trash me-1"></i> Sil</a>
+                        </div>
+
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+
+</div>

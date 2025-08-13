@@ -1,0 +1,23 @@
+﻿ @model Reporter.EntityLayer.Entities.Slider
+@{
+    Layout = null;
+}
+
+<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<div class="container">
+    <br /><br />
+    <form method="post">
+        <input type="hidden" asp-for="SliderId" />
+        <label>Slider Başlığı</label>
+        <input type="text" asp-for="Title" class="form-control" />
+        <br />
+        <label>Slider Fotoğraf Url</label>
+        <input type="text" asp-for="ImageUrl" class="form-control" />
+        <br />
+        <label>Slider Açıklaması</label>
+        <input type="text" asp-for="Description" class="form-control" />
+        <br />
+        <button class="btn btn-success">Sliderı Güncelle</button>
+    </form>
+</div>

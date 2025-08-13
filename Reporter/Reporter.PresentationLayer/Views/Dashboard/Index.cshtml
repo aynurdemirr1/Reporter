@@ -1,0 +1,270 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AuthorNewLayout.cshtml";
+}
+@{
+    var categoryStats = (IEnumerable<dynamic>)ViewBag.CategoryStats;
+}
+<div class="content-wrapper"> 
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="row">
+            <div class="col-lg-8 mb-4 order-0">
+                <div class="card">
+                    <div class="d-flex align-items-end row">
+                        <div class="col-sm-7">
+                            <div class="card-body">
+                                <h5 class="card-title text-primary">Hoşgeldiniz @ViewBag.FullName! 🎉</h5>
+                                <p class="mb-4">
+                                    Bu panel üzerinden makalelerini yönetebilir, kategorilere göre içerikleri takip edebilir ve yorumlarını analiz edebilirsin.
+                                </p>
+                                <a href="/Profile/UserDetail" class="btn btn-sm btn-outline-primary">Profil Bilgilerini Güncelle</a>
+                            </div>
+                        </div>
+                        <div class="col-sm-5 text-center text-sm-left">
+                            <div class="card-body px-3 px-md-4">
+                                <img src="@ViewBag.Image"
+                                     height="140"
+                                     alt="View Badge User" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 order-1">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12 col-6 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-title d-flex align-items-start justify-content-between">
+                                    <div class="avatar flex-shrink-0">
+                                        <img src="~/sneat-1.0.0/assets/img/icons/unicons/chart-success.png"
+                                             alt="chart success"
+                                             class="rounded" />
+                                    </div>
+                                </div>
+                                <span class="fw-semibold d-block mb-1">Toplam makale</span>
+                                <h3 class="card-title mb-2">@ViewBag.TotalArticles</h3>
+                                <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i></small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12 col-6 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-title d-flex align-items-start justify-content-between">
+                                    <div class="avatar flex-shrink-0">
+                                        <img src="~/sneat-1.0.0/assets/img/icons/unicons/wallet-info.png"
+                                             alt="Credit Card"
+                                             class="rounded" />
+                                    </div>
+                                </div>
+                                <span class="fw-semibold d-block mb-1">Toplam yorum</span>
+                                <h3 class="card-title text-nowrap mb-1">@ViewBag.TotalComments</h3>
+                                <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Total Revenue -->
+            <div class="col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4">
+                <div class="card">
+                    <div class="row row-bordered g-0">
+                        <div class="col-md-8">
+                            <canvas id="colorfulColumnChart" class="px-2"></canvas>
+                        </div>
+                        <div class="col-md-4">
+                            <canvas id="donutChart" width="400" height="400"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/ Total Revenue -->
+            <div class="col-12 col-md-8 col-lg-4 order-3 order-md-2">
+                <div class="row">
+                    <div class="col-6 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-title d-flex align-items-start justify-content-between">
+                                    <div class="avatar flex-shrink-0">
+                                        <img src="~/sneat-1.0.0/assets/img/icons/unicons/paypal.png" alt="Credit Card" class="rounded" />
+                                    </div>
+                                </div>
+                                <span style="font-weight: bold;" class="d-block mb-1">Farklı kategoride yazılan makale sayısı</span>
+                                <br />
+                                <h3 class="card-title text-nowrap mb-2">@ViewBag.DistinctCategoryCount</h3>
+                                <small class="text-danger fw-semibold"><i class="bx bx-down-arrow-alt"></i></small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-title d-flex align-items-start justify-content-between">
+                                    <div class="avatar flex-shrink-0">
+                                        <img src="~/sneat-1.0.0/assets/img/icons/unicons/cc-primary.png" alt="Comment Count" class="rounded" />
+                                    </div>
+                                </div>
+                                <span class="fw-semibold d-block mb-1">En çok yorum alan makalemin yorum sayısı</span>
+                                <h3>@ViewBag.MostCommentedArticleCommentCount</h3>
+                                <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between flex-sm-row flex-column gap-3">
+                        <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
+                            <div class="card-title">
+                                <h5 class="text-nowrap mb-2">Son Yazılan Makale</h5>
+                                <span class="badge bg-label-warning rounded-pill">@ViewBag.LatestArticleDate</span>
+                            </div>
+                            <div class="mt-sm-auto">
+                                <small class="text-success text-nowrap fw-semibold">
+                                    Kategori: @ViewBag.LatestArticleCategory<br />
+                                    Yorum Sayısı: @ViewBag.LatestArticleCommentCount
+                                </small>
+                                <h3 class="mb-0">@ViewBag.LatestArticleTitle</h3>
+                            </div>
+                        </div>
+                        <div id="profileReportChart"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
+                <div class="card h-100">
+                    <div class="card-header d-flex align-items-center justify-content-between pb-0">
+                        <div class="card-title mb-0">
+                            <h5 class="m-0 me-2">Kategori Bazlı Makaleler</h5> <br />
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div class="d-flex flex-column align-items-center gap-1">
+                                <h2 class="mb-2">@ViewBag.TotalArticles</h2>
+                            </div>
+                            <div id="categoryArticleChart"></div> <!-- Chart opsiyonel -->
+                        </div>
+                        <ul class="p-0 m-0">
+                            @foreach (var item in ViewBag.CategoryStats)
+                            {
+                                <li class="d-flex mb-4 pb-1">
+                                    <div class="avatar flex-shrink-0 me-3">
+                                        <span class="avatar-initial rounded bg-label-primary">
+                                            <i class="bx bx-folder"></i>
+                                        </span>
+                                    </div>
+                                    <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                        <div class="me-2">
+                                            <h6 class="mb-0">@item.CategoryName</h6>
+                                            <small class="text-muted">Kategoriye ait makaleler</small>
+                                        </div>
+                                        <div class="user-progress">
+                                            <small class="fw-semibold">@item.Count</small>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 order-1 mb-4">
+                <div class="card h-100">
+                    <div class="card-header d-flex align-items-center justify-content-between">
+                        <h5 class="card-title m-0 me-2">Makaleme Yapılan Son Yorumlar</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="p-0 m-0">
+                            @foreach (var comment in ViewBag.LastComments)
+                            {
+                                <li class="d-flex mb-4 pb-1">
+                                    <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                        <div class="me-2">
+                                            <small class="text-muted d-block mb-1"> Yorum Sahibi: @comment.UserName</small>
+                                            <h6 class="mb-0">@comment.ArticleTitle</h6>
+                                            <small class="text-muted">@comment.CommentText</small>
+                                            <small class="text-muted d-block">@comment.CreatedDate.ToString("dd MMM yyyy HH:mm")</small>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        var categoryLabels = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.CategoryNames));
+        var categoryData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.CategoryCounts));
+
+        // Grafiklerde kullanılacak renkler - istediğin kadar ekleyebilirsin
+        var chartColors = [
+            '#FF6384', // kırmızı ton
+            '#36A2EB', // mavi ton
+            '#FFCE56', // sarı ton
+            '#4BC0C0', // turkuaz ton
+            '#9966FF', // mor ton
+            '#FF9F40'  // turuncu ton
+        ];
+
+        // Colorful column chart
+        const ctxColumn = document.getElementById('colorfulColumnChart').getContext('2d');
+        const colorfulColumnChart = new Chart(ctxColumn, {
+            type: 'bar',
+            data: {
+                labels: categoryLabels,
+                datasets: [{
+                    label: 'Kategori Bazlı Makale Sayısı',
+                    data: categoryData,
+                    backgroundColor: chartColors,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+
+        // Donut chart
+        const ctxDonut = document.getElementById('donutChart').getContext('2d');
+        const donutChart = new Chart(ctxDonut, {
+            type: 'doughnut',
+            data: {
+                labels: categoryLabels,
+                datasets: [{
+                    label: 'Kategori Bazlı Makale Sayısı',
+                    data: categoryData,
+                    backgroundColor: chartColors
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'right' }
+                }
+            }
+        });
+    </script>
+}

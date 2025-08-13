@@ -1,0 +1,80 @@
+﻿﻿@if (User.Identity.IsAuthenticated)
+{
+    <div class="comment-form-wrap pt-5">
+        <h3>Bir Yorum Bırakın</h3>
+        <form id="commentForm" method="post" action="/Comment/CreateComment">
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <textarea name="CommentDetail" class="form-control" placeholder="Yorumunuzu yazın..." required></textarea>
+            </div>
+            <br />
+            <input type="hidden" name="ArticleId" value="@ViewBag.ArticleId" />
+            <button type="submit" class="btn btn-primary">Yorum Yap</button>
+        </form>
+        <div id="commentResult" class="mt-3"></div>
+    </div>
+}
+else
+{
+    <div class="alert alert-warning">
+        Lütfen yorum yapmak için <a href="/Login/UserLogin/">giriş yapınız</a>.
+    </div>
+}
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#commentForm').submit(function (e) {
+                e.preventDefault();
+
+                $.ajax({
+                    type: 'POST',
+                    url: $(this).attr('action'),
+                    data: $(this).serialize(),
+                    headers: {
+                        'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
+                    },
+                    success: function (response) {
+                        if (response.status === "success") {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Başarılı!',
+                                text: response.message,
+                                confirmButtonText: 'Tamam'
+                            }).then(() => {
+                                location.reload();
+                            });
+                        }
+                        else if (response.status === "toxic") {
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'Uyarı!',
+                                text: response.message,
+                                confirmButtonText: 'Tamam'
+                            });
+                        }
+                        else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Hata!',
+                                text: response.message,
+                                confirmButtonText: 'Tamam'
+                            });
+                        }
+                    },
+                    error: function () {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Hata!',
+                            text: 'Sunucuya bağlanırken bir hata oluştu.',
+                            confirmButtonText: 'Tamam'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}

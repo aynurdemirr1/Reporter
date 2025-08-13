@@ -1,0 +1,54 @@
+﻿@model Reporter.EntityLayer.Entities.Article
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    @await Component.InvokeAsync("_HeadDefaultComponentPartial")
+</head>
+<body class="single-post-page">
+
+    @await Component.InvokeAsync("_ArticleDetailNavbarComponentPartial")
+
+    <main class="main">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-8">
+                    <!-- Başlık ve içerik -->
+                    <h1>@Model.Title</h1>
+                    <p><em>@Model.CreatedDate.ToString("dd MMM yyyy") – @Model.AppUser?.Name @Model.AppUser?.Surname</em></p>
+                    <div>@Html.Raw(Model.Content)</div>
+
+                    <hr />
+
+                    <!-- Yorumlar -->
+                    <h3>Yorumlar</h3>
+                    @await Component.InvokeAsync("_ArticleDetailCommentsComponentPartial", new { id = Model.ArticleId })
+
+                    <hr />
+
+                    <!-- Yorum Ekle -->
+                    <h3>Yorum Yap</h3>
+                    @await Component.InvokeAsync("_ArticleDetailAddCommentComponentPartial", new { articleId = Model.ArticleId })
+                </div>
+
+                <div class="col-lg-4 sidebar">
+                    <div class="widgets-container">
+                        @await Component.InvokeAsync("_ArticleDetailAboutAuthorComponentPartial", new { id = Model.ArticleId })
+                        @await Component.InvokeAsync("_ArticleDetailRecentArticlesComponentPartial")
+                        @await Component.InvokeAsync("_ArticleDetailTagListComponentPartial")
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    @await Component.InvokeAsync("_FooterDefaultComponentPartial")
+
+</body>
+</html>

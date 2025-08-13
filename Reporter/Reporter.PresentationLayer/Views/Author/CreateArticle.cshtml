@@ -1,0 +1,30 @@
+﻿@model Reporter.EntityLayer.Entities.Article
+
+@{
+    ViewData["Title"] = "CreateArticle";
+    Layout = "~/Views/Shared/_AuthorNewLayout.cshtml";
+}
+
+<h1>Hoş geldiniz @ViewBag.name</h1>
+<h2>Kullanıcı Id: @ViewBag.id</h2>
+
+<hr />
+
+<form method="post">
+    <label>Makale Başlığı</label>
+    <input type="text" class="form-control" asp-for="Title" />
+    <br />
+    <label>Makale Küçük Kapak Görseli</label>
+    <input type="text" class="form-control" asp-for="CoverImageUrl" />
+    <br />
+    <label>Makale Büyük Görsel</label>
+    <input type="text" class="form-control" asp-for="MainImageUrl" />
+    <br />
+    <label>Makale Kategorisi</label>
+    @Html.DropDownListFor(x => x.CategoryId, (List<SelectListItem>)ViewBag.categories, new { @class = "form-control" })
+    <br />
+    <label>Makale İçeriği</label>
+    <textarea class="form-control" asp-for="Content" rows="5"></textarea>
+    <br />
+    <button class="btn btn-primary">Makaleyi Oluştur</button>
+</form>

@@ -1,0 +1,48 @@
+﻿@model Reporter.EntityLayer.Entities.Article
+
+<section id="blog-details" class="blog-details section">
+    <div class="container">
+
+        <article class="article">
+
+            <div class="post-img">
+                <img src="@Model.MainImageUrl" alt="" class="img-fluid">
+            </div>
+
+            <h2 class="title">@Model.Title</h2>
+
+            <div class="meta-top">
+                <ul>
+                    <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-details.html">@Model.AppUser.Name @Model.AppUser.Surname</a></li>
+                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-details.html"><time datetime="2020-01-01">@Model.CreatedDate.ToString("dd-MMM-yyyy")</time></a></li>
+                    <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-details.html">0 Yorum</a></li>
+                </ul>
+            </div><!-- End meta top -->
+
+            <div class="content">
+                <p>
+                    @Model.Content
+                </p>
+
+
+
+            </div><!-- End post content -->
+
+            <div class="meta-bottom">
+                <i class="bi bi-folder"></i>
+                <ul class="cats">
+                    <li><a href="#">Business</a></li>
+                </ul>
+
+                <i class="bi bi-tags"></i>
+                <ul class="tags">
+                    <li><a href="#">Creative</a></li>
+                    <li><a href="#">Tips</a></li>
+                    <li><a href="#">Marketing</a></li>
+                </ul>
+            </div><!-- End meta bottom -->
+
+        </article>
+
+    </div>
+</section>

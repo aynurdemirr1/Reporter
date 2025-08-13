@@ -1,0 +1,101 @@
+﻿﻿@using Reporter.PresentationLayer.Models
+@model UserUpdateViewModel
+
+@{
+    ViewData["Title"] = "UserDetail";
+    Layout = "~/Views/Shared/_AuthorNewLayout.cshtml";
+}
+
+<!-- Başarılı güncelleme mesajı -->
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+<!DOCTYPE html>
+
+<!-- beautify ignore:start -->
+<html lang="en"
+      class="light-style layout-menu-fixed"
+      dir="ltr"
+      data-theme="theme-default"
+      data-assets-path="../assets/"
+      data-template="vertical-menu-template-free">
+
+
+<body>
+    <div class="container-xxl flex-grow-1 container-p-y">
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="card mb-4">
+                    <h5 class="card-header">Profil Düzenleme</h5>
+                    <!-- Account -->
+                    <div class="card-body">
+                        <div class="d-flex align-items-start align-items-sm-center gap-4">
+                            <img src="@Model.ImageUrl"
+                                 alt="user-avatar"
+                                 class="d-block rounded"
+                                 height="100"
+                                 width="100"
+                                 id="uploadedAvatar" />
+                            <div class="media-body">
+                                <h3 class="mb-0">@Model.Name @Model.Surname</h3>
+                                <p class="text-muted mb-0">@Model.Email</p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <hr class="my-0" />
+                    <div class="card-body">
+                        <form asp-action="UserDetail" method="post">
+                            <div class="row">
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label">Ad</label>
+                                    <input asp-for="Name" class="form-control" required
+                                           type="text"
+                                           id="firstName"
+                                           autofocus />
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label">Soyad</label>
+                                    <input asp-for="Surname" class="form-control" required type="text" id="lastName" />
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label">E-mail</label>
+                                    <input asp-for="Email" class="form-control" required type="email" id="email" />
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label">Kullanıcı Adı</label>
+                                    <input asp-for="Username" class="form-control" required type="text" id="organization" />
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label">Telefon</label>
+                                    <div class="input-group input-group-merge">
+                                        <span class="input-group-text">TR (+90)</span>
+                                        <input asp-for="PhoneNumber" class="form-control" required id="phoneNumber" />
+                                    </div>
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label">Görsel Url</label>
+                                    <input asp-for="ImageUrl" class="form-control" required id="address" />
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label">Yeni Şifre (değiştirmek istiyorsan)</label>
+                                    <input asp-for="Password" type="password" class="form-control" id="state" />
+                                </div>
+                            </div>
+                            <div class="mt-2">
+                                <button type="submit" class="btn btn-primary me-2">Güncelle</button>
+                                <button type="reset" class="btn btn-outline-secondary">İptal</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /Account -->
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

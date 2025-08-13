@@ -1,0 +1,36 @@
+﻿@model List<Reporter.EntityLayer.Entities.Comment>
+
+<section id="blog-comments" class="blog-comments section">
+    <div class="container">
+        <h4 class="comments-count">@Model.Count() Yorum</h4>
+
+        <div id="commentList">
+            @foreach (var comment in Model)
+            {
+                <div id="comment-@comment.CommentId" class="comment mb-3 p-3 border rounded @(comment.IsToxic ? "border-danger bg-light" : "border-secondary")">
+                    <div class="d-flex">
+                        <div class="comment-img">
+                            <img src="@comment.AppUser.ImageUrl" alt="Profil" style="width:60px; height:60px; border-radius:50%;" />
+                        </div>
+                        <div class="ms-3">
+                            <h5>
+                                <a href="#">@comment.AppUser.Name @comment.AppUser.Surname</a>
+                                <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Yanıtla</a>
+                            </h5>
+                            <time datetime="@comment.CommentDate.ToString("yyyy-MM-dd")">@comment.CommentDate.ToString("dd MMM yyyy")</time>
+
+                            <p>@comment.CommentDetail</p>
+
+                            @if (comment.IsToxic)
+                            {
+                                <div class="alert alert-danger mt-2 p-2">
+                                    ⚠ Bu yorum toksik içerik barındırıyor (Skor: @comment.ToxicityScore.ToString("0.00"))
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div> <!-- /#commentList -->
+    </div>
+</section>

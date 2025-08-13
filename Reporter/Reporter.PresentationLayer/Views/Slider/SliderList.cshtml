@@ -1,0 +1,31 @@
+﻿@model List<Reporter.EntityLayer.Entities.Slider>
+
+@{
+    Layout = null;
+}
+
+<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<div class="container">
+    <br /><br />
+    <table class="table table-bordered">
+        <tr>
+            <th>#</th>
+            <th>Başlık</th>
+            <th>Açıklama</th>
+            <th>Sil</th>
+            <th>Güncelle</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.SliderId</td>
+                <td>@item.Title</td>
+                <td>@item.Description</td>
+                <td><a href="/Slider/DeleteSlider/@item.SliderId" class="btn btn-danger">Sil</a></td>
+                <td><a href="/Slider/UpdateSlider/@item.SliderId" class="btn btn-success">Güncelle</a></td>
+            </tr>
+        }
+    </table>
+    <a href="/Slider/CreateSlider/" class="btn btn-primary">Yeni Slider Girişi</a>
+</div>

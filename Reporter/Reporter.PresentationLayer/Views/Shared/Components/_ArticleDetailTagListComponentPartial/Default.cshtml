@@ -1,0 +1,12 @@
+﻿@model List<Reporter.EntityLayer.Entities.Tag>
+
+<div class="tags-widget widget-item">
+
+    <h3 class="widget-title">Etiketler</h3>
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li><a href="#">@item.TagName</a></li>
+        }
+    </ul>
+</div>

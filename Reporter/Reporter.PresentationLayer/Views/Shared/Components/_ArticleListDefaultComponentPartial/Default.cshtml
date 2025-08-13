@@ -1,0 +1,85 @@
+﻿@model List<Reporter.EntityLayer.Entities.Article>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <!-- Blog Posts Section -->
+            <section id="blog-posts" class="blog-posts section">
+
+                <div class="container">
+                    <div class="row gy-4">
+
+                        @foreach (var item in Model)
+                        {
+                            <div class="col-lg-4">
+                                <article class="position-relative h-100">
+
+                                    <div class="post-img position-relative overflow-hidden">
+                                        <img src="@item.CoverImageUrl" class="img-fluid" alt="" style="width:350px; height:250px">
+                                        <span class="post-date">@item.CreatedDate.ToString("dd-MMM-yyy")</span>
+                                    </div>
+
+                                    <div class="post-content d-flex flex-column">
+
+                                        <h3 class="post-title">@item.Title</h3>
+
+                                        <div class="meta d-flex align-items-center">
+                                            <div class="d-flex align-items-center">
+                                                <i class="bi bi-person"></i> <span class="ps-2">@item.AppUser.Name @item.AppUser.Surname</span>
+                                            </div>
+                                            <span class="px-3 text-black-50">/</span>
+                                            <div class="d-flex align-items-center">
+                                                <i class="bi bi-folder2"></i> <span class="ps-2">@item.Category.CategoryName</span>
+                                            </div>
+                                        </div>
+
+                                        <p>
+                                            @item.Content.Substring(0,120)...
+                                        </p>
+
+                                        <hr>
+
+                                        <a href="/Article/ArticleDetail/@item.Slug" class="readmore stretched-link"><span>Devamını Okuyun</span><i class="bi bi-arrow-right"></i></a>
+
+                                    </div>
+
+                                </article>
+                            </div>
+
+                            <!-- End post list item -->
+                        }
+
+
+
+
+
+                    </div>
+                </div>
+
+            </section><!-- /Blog Posts Section -->
+            <!-- Blog Pagination Section -->
+            <section id="blog-pagination" class="blog-pagination section">
+
+                <div class="container">
+                    <div class="d-flex justify-content-center">
+                        <ul>
+                            <li><a href="#"><i class="bi bi-chevron-left"></i></a></li>
+                            <li><a href="#">1</a></li>
+                            <li><a href="#" class="active">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li>...</li>
+                            <li><a href="#">10</a></li>
+                            <li><a href="#"><i class="bi bi-chevron-right"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </section><!-- /Blog Pagination Section -->
+
+        </div>
+
+
+
+    </div>
+</div>
